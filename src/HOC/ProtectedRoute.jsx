@@ -1,16 +1,21 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { getToken } from '../../utils/helpers';
+import { getToken } from '../utils/helpers';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({ history, component: Component, ...rest }) => {
+  const checkToken = getToken();
   return (
     <Route
       {...rest}
       render={props =>
-        getToken() ? <Component {...props} /> : <Redirect to="/" />
-      }
-    />
+        checkToken ? <Component {...props} /> : <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    }
+  />
   );
 };
 

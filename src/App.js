@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
+import ProtectedRoute from './HOC/ProtectedRoute';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Comments from './pages/Comments'
@@ -13,14 +14,13 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path='/' element={<Login/>} />
-          <Route exact element={<Comments/>} path='/comments' />
-          <Route  exact path='/signup' element={<Signup/>} />
-          {/* <Route component={Error404} path='/*' /> */}
-        </Routes>
-      </BrowserRouter>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route exact path='/signup' component={Signup} />
+          <ProtectedRoute exact path='/comments' component={Comments} />
+        </Switch>
+      </Router>
     </QueryClientProvider>
   );
 }
