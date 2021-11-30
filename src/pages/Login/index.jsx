@@ -1,10 +1,19 @@
 import React, { useState } from "react";
+// import { useQuery } from 'react-query';
+import { withRouter } from 'react-router-dom';
+import AuthApi from '../../api/auth'
 
-const Login = () => {
+const authApi = new AuthApi();
+
+const { userLogin } = authApi;
+
+const Login = ({ history }) => {
+  // const { data, status } = useQuery('login', userLogin);
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     event.persist();
@@ -16,7 +25,18 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = values;
+    try {
+      setLoading(!loading);
+      const { email, password } = values;
+      await userLogin({ email, password }, history);
+      setLoading(!loading);
+      history.push('/comments')
+    } catch (error) {
+      if (error) {
+        setLoading(false);
+        throw error
+      }
+    }
   };
 
   return (
@@ -24,32 +44,36 @@ const Login = () => {
       <h1>Login page</h1>
       <div>
         <form onSubmit={handleSubmit}>
-          <input
-            onChange={handleChange}
-            placeholder="email"
-            type="email"
-            name="email"
-            value={values.email}
-          />
-          <input
-            onChange={handleChange}
-            placeholder="password"
-            type="password"
-            name="password"
-            value={values.password}
-          />
-          {/* <input
-            value={`${isLoading ? "Loading..." : "Submit"}`}
-            type="submit"
-          /> */}
+          <div>
             <input
-            value='Submit'
-            type="submit"
-          />
+              onChange={handleChange}
+              placeholder="email"
+              type="email"
+              name="email"
+              value={values.email}
+            />
+            <input
+              onChange={handleChange}
+              placeholder="password"
+              type="password"
+              name="password"
+              value={values.password}
+            />
+          </div>
+          <div>
+            <input
+              value={`${loading ? 'Loading...' : "Submit"}`}
+              type="submit"
+            />
+              {/* <input
+              value='Submit'
+              type="submit"
+            /> */}
+          </div>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default withRouter(Login);

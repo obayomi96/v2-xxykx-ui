@@ -4,6 +4,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
+import { ReactQueryDevtools } from 'react-query-devtools';
 import ProtectedRoute from './HOC/ProtectedRoute';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -21,6 +22,7 @@ function App() {
           <ProtectedRoute exact path='/comments' component={Comments} />
         </Switch>
       </Router>
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
