@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { useQuery } from 'react-query';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import AuthApi from '../../api/auth'
 
 const authApi = new AuthApi();
@@ -28,7 +28,7 @@ const Login = ({ history }) => {
     try {
       setLoading(!loading);
       const { email, password } = values;
-      await userLogin({ email, password }, history);
+      await userLogin({ email, password });
       setLoading(!loading);
       history.push('/comments')
     } catch (error) {
@@ -71,6 +71,9 @@ const Login = ({ history }) => {
             /> */}
           </div>
         </form>
+      </div>
+      <div>
+        <p>Dont have an acount? <Link to='/signup'>Sign up</Link> </p>
       </div>
     </div>
   );

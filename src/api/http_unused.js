@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getToken } from './helpers';
+import { getToken } from '../utils/helpers';
 import config from '../config';
 
 let http;

@@ -1,11 +1,11 @@
 import React from 'react';
+import Header from '../../components/Header'
 
 function Comments() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Header />
       comments page
-      </header>
     </div>
   );
 }
