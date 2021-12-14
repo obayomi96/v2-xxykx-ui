@@ -19,13 +19,14 @@ class AuthService {
     }
   }
 
-  userSignup = async (credentials) => {
+  userSignup = async (credentials, history) => {
     try {
       const response = await http.post('register', { user: { ...credentials }})
       if (response.status === 201) {
         const { user } = response.data;
         localStorage.setItem('user_token', user.token)
         setToken(user.token)
+        history.push('/comments')
         return user
       }
     } catch(error) {
@@ -35,4 +36,5 @@ class AuthService {
 
 }
 
-export default AuthService
+export default AuthService;
+
