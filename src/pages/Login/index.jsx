@@ -28,9 +28,8 @@ const Login = ({ history }) => {
     try {
       setLoading(!loading);
       const { email, password } = values;
-      await userLogin({ email, password });
+      await userLogin({ email, password }, history);
       setLoading(!loading);
-      history.push('/comments')
     } catch (error) {
       if (error) {
         setLoading(false);
