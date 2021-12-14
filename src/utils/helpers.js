@@ -39,4 +39,4 @@ export const logout = () => {
   destroyEncodedUser();
   removeRedirectUrl();
   window.location.assign('/login');
-};
+}; 
