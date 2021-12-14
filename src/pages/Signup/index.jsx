@@ -6,7 +6,7 @@ const authApi = new AuthApi();
 
 const { userSignup } = authApi;
 
-const Signup = ({history}) => {
+const Signup = ({ history }) => {
 
   const [values, setValues] = useState({
     name: '',
@@ -26,9 +26,8 @@ const Signup = ({history}) => {
     try {
       setLoading(!loading);
       const { name, email, password } = values;
-      await userSignup({ name, email, password });
+      await userSignup({ name, email, password }, history);
       setLoading(!loading);
-      history.push('/comments')
     } catch (error) {
       if (error) {
         setLoading(false);
