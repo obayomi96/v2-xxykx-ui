@@ -26,7 +26,6 @@ class CommentService {
       return error
     }
   }
-
 }
 
 export default CommentService;
