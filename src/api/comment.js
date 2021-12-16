@@ -15,7 +15,7 @@ class CommentService {
     }
   }
 
-  AddComment = async (credentials) => {
+  addComment = async (credentials) => {
     try {
       const response = await http.post('comments', { comment: { ...credentials }})
       if (response.status === 201) {
@@ -26,6 +26,7 @@ class CommentService {
       return error
     }
   }
+
 }
 
 export default CommentService;

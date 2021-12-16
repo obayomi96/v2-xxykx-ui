@@ -24,9 +24,11 @@ function Comments() {
       <div>
         <ul>
           {
-            commentsList.map((comment) => {
-              <li key={comment.id}>{comment.text}</li>
-            })
+            commentsList && commentsList.map((comment) => (
+              <>
+                <li key={comment.id}>{comment.content}</li>
+              </>
+            ))
           }
         </ul>
       </div>
